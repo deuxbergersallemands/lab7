@@ -7,16 +7,21 @@ exports.projectInfo = function(req, res) { 
   // call the following callback
 
   models.Project
-    .find()
+    .find(projectID)
     .sort('date')
     .exec(displayPosts); 
 
-  function displayPosts(err, projects) {
+    function displayPosts(err, displayProject){
+      if (err) console.log(err)
+      console.log(displayPosts); 
+    }
+
+  function afterQuery(err, projects) {
     if(err) console.log(err);
     res.json(projects[0]);
   }
 
-  
+
 }
 
 exports.addProject = function(req, res) {
